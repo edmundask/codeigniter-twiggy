@@ -3,6 +3,11 @@
 Twiggy is not just a simple implementation of Twig template engine for CodeIgniter. It supports themes, layouts, templates for regular apps and also for apps that use HMVC (module support). 
 It is supposed to make life easier for developing and maitaining CodeIgniter applications where themes and nicely structured templates are necessary.
 
+## Why Should I Care?
+
+Twig by itself is a very powerful and flexible templating system but with CodeIgniter it is even cooler! With Twiggy you can separately set the theme, layout and template for each page. 
+What is even more interesting, this does not replace CodeIgniter's default Views, so you can still load views as such: `$this->load->view()`.
+
 # Requirements
 
 * PHP 5.3.x
@@ -10,7 +15,88 @@ It is supposed to make life easier for developing and maitaining CodeIgniter app
 
 # How To Use It
 
-This is a WIP so no info yet, sorry. :)
+## 1. Load library (as a spark)
+
+`$this->load->spark('twiggy');`
+
+## 2. Set up dir structure
+
+1. Create a directory structure:
+
+	```
+	    +-{APPPATH}/
+	    | +-themes/
+	    | | +-default/
+	    | | | +-_layouts/
+	```
+
+	NOTE: `{APPPATH}` is the folder where all your controllers, models and other neat stuff is placed.
+	By default that folder is called `application`.
+
+2. Create a default layout `index.html.twig` and place it in _layouts  folder:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<title>Default layout</title>
+	</head>
+	<body>
+
+		{% block content %}
+
+
+
+		{% endblock %}
+		
+	</body>
+</html>
+```
+
+3. Create a default template file `index.html.twig` at the root of `default` theme folder:
+
+```
+{% extends _layout %}
+
+{% block content %}
+
+	Default template file.
+
+{% endblock %}
+```
+
+4. You should end up with a structure like this:
+
+	```
+	    +-{APPPATH}/
+	    | +-themes/
+	    | | +-default/
+	    | | | +-_layouts/
+	    | | | | +-index.hml.twig
+	    | | | +-index.html.twig
+	```
+
+## 3. Display the template
+
+`$this->twiggy->display();`
+
+## 4. What's next?
+
+In the example above we only displayed the default template and layout. Obviously, you can create as many layouts and templates as you want.
+For example, create a new template file `welcome.html.twig` and load it before sending the output to the browser.
+
+```
+// Whoah, methoding chaining FTW!
+$this->twiggy->template('welcome')->display();
+```
+
+Notice that you only need to specify the name of the template (without the extension `*.html.twig`).
+
+There are much more cool stuff that you should check out by visiting the [wiki](https://github.com/edmundask/codeigniter-twiggy/wiki).
 
 # CHANGELOG
 
