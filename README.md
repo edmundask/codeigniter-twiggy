@@ -24,10 +24,10 @@ What is even more interesting, this does not replace CodeIgniter's default Views
 1. Create a directory structure:
 
 	```
-	    +-{APPPATH}/
-	    | +-themes/
-	    | | +-default/
-	    | | | +-_layouts/
+    +-{APPPATH}/
+    | +-themes/
+    | | +-default/
+    | | | +-_layouts/
 	```
 
 	NOTE: `{APPPATH}` is the folder where all your controllers, models and other neat stuff is placed.
@@ -72,12 +72,12 @@ What is even more interesting, this does not replace CodeIgniter's default Views
 4. You should end up with a structure like this:
 
 	```
-	    +-{APPPATH}/
-	    | +-themes/
-	    | | +-default/
-	    | | | +-_layouts/
-	    | | | | +-index.hml.twig
-	    | | | +-index.html.twig
+    +-{APPPATH}/
+    | +-themes/
+    | | +-default/
+    | | | +-_layouts/
+    | | | | +-index.hml.twig
+    | | | +-index.html.twig
 	```
 
 ## 3. Display the template
@@ -96,7 +96,7 @@ $this->twiggy->template('welcome')->display();
 
 Notice that you only need to specify the name of the template (without the extension `*.html.twig`).
 
-There are much more cool stuff that you should check out by visiting the [wiki](https://github.com/edmundask/codeigniter-twiggy/wiki).
+There is much more cool stuff that you should check out by visiting the [wiki](https://github.com/edmundask/codeigniter-twiggy/wiki).
 
 # CHANGELOG
 
