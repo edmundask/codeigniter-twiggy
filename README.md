@@ -35,39 +35,39 @@ What is even more interesting, this does not replace CodeIgniter's default Views
 
 2. Create a default layout `index.html.twig` and place it in _layouts  folder:
 
-```
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<title>Default layout</title>
-	</head>
-	<body>
+	```
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+			<title>Default layout</title>
+		</head>
+		<body>
 
-		{% block content %}
+			{% block content %}
 
 
 
-		{% endblock %}
-		
-	</body>
-</html>
-```
+			{% endblock %}
+			
+		</body>
+	</html>
+	```
 
 3. Create a default template file `index.html.twig` at the root of `default` theme folder:
 
-```
-{% extends _layout %}
+	```
+	{% extends _layout %}
 
-{% block content %}
+	{% block content %}
 
-	Default template file.
+		Default template file.
 
-{% endblock %}
-```
+	{% endblock %}
+	```
 
 4. You should end up with a structure like this:
 
