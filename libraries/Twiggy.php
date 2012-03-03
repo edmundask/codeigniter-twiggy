@@ -12,7 +12,7 @@
  * @category  			Libraries
  * @author    			Edmundas Kondrašovas <as@edmundask.lt>
  * @license   			http://www.opensource.org/licenses/MIT
- * @version   			0.7.0
+ * @version   			0.8.0
  * @copyright 			Copyright (c) 2012 Edmundas Kondrašovas <as@edmundask.lt>
  */
 
@@ -80,7 +80,7 @@ class Twiggy
 	 * Set data
 	 * 
 	 * @access	public
-	 * @param 	string 	key (variable name)
+	 * @param 	mixed  	key (variable name) or an array of variables names with values
 	 * @param 	mixed  	data
 	 * @param 	boolean	(optional) is this a global variable?
 	 * @return	object 	instance of this class
@@ -88,14 +88,22 @@ class Twiggy
 
 	public function set($key, $value, $global = FALSE)
 	{
-		if($global)
+		if(is_array($key))
 		{
-			$this->_twig->addGlobal($key, $value);
+			foreach($key as $k => $v) $this->set($k, $v, $global);
 		}
 		else
 		{
-			$this->_data[$key] = $value;
+			if($global)
+			{
+				$this->_twig->addGlobal($key, $value);
+			}
+			else
+			{
+			 	$this->_data[$key] = $value;
+			}	
 		}
+
 
 		return $this;
 	}
@@ -216,7 +224,7 @@ class Twiggy
 	* @access	private
 	* @param 	string	name of theme to load
 	* @return	void
-	*/       	
+	*/
 
 	private function _set_template_locations($theme)
 	{
@@ -245,6 +253,42 @@ class Twiggy
 		{
 			$this->_twig_loader->setPaths($this->_template_locations);
 		}
+	}
+
+	/**
+	* Get current theme
+	*
+	* @access	public
+	* @return	string	name of the currently loaded theme
+	*/
+
+	public function get_theme()
+	{
+		return $this->_theme;
+	}
+
+	/**
+	* Get current layout
+	*
+	* @access	public
+	* @return	string	name of the currently used layout
+	*/
+
+	public function get_layout()
+	{
+		return $this->_layout;
+	}
+
+	/**
+	* Get template
+	*
+	* @access	public
+	* @return	string	name of the loaded template file (without the extension)
+	*/
+
+	public function get_template()
+	{
+		return $this->_template;
 	}
 
 	/**
