@@ -27,7 +27,7 @@ class Twiggy
 
 	private $_config = array();
 	private $_template_locations = array();
-	private $_data;
+	private $_data = array();
 	private $_themes_base_dir;
 	private $_theme;
 	private $_layout;
@@ -58,7 +58,7 @@ class Twiggy
 		catch(Twig_Error_Loader $e)
 		{
 			log_message('error', 'Twiggy: failed to load the default theme');
-			show_error("Default theme in {$this->_themes_base_dir}{$this->_config['default_theme']} does not exist.");
+			show_error($e->getRawMessage());
 		}
 		
 		$this->_twig = new Twig_Environment($this->_twig_loader, $this->_config['environment']);
@@ -80,7 +80,7 @@ class Twiggy
 	 * Set data
 	 * 
 	 * @access	public
-	 * @param 	mixed  	key (variable name) or an array of variables names with values
+	 * @param 	mixed  	key (variable name) or an array of variable names with values
 	 * @param 	mixed  	data
 	 * @param 	boolean	(optional) is this a global variable?
 	 * @return	object 	instance of this class
@@ -214,8 +214,15 @@ class Twiggy
 
 	public function display()
 	{
-		$output = $this->_twig->loadTemplate($this->_template);
-		$output->display($this->_data);
+		try
+		{
+			$output = $this->_twig->loadTemplate($this->_template);
+			$output->display($this->_data);
+		}
+		catch(Twig_Error_Loader $e)
+		{
+			show_error($e->getRawMessage());
+		}
 	}
 
 	/**
