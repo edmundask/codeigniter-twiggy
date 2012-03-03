@@ -64,6 +64,11 @@ class Twiggy
 		$this->_twig = new Twig_Environment($this->_twig_loader, $this->_config['environment']);
 		$this->_twig->setLexer(new Twig_Lexer($this->_twig, $this->_config['delimiters']));
 
+		// Initialize defaults
+		$this->theme($this->_config['default_theme'])
+			 ->layout($this->_config['default_layout'])
+			 ->template($this->_config['default_template']);
+
 		// Auto-register functions and filters.
 		if(count($this->_config['register_functions']) > 0)
 		{
@@ -154,7 +159,7 @@ class Twiggy
 			show_error("Theme does not exist in {$this->_themes_base_dir}{$theme}.");
 		}
 
-		$this->_loaded_theme = $theme;
+		$this->_theme = $theme;
 		$this->_set_template_locations($theme);
 
 		return $this;
@@ -170,8 +175,8 @@ class Twiggy
 
 	public function layout($name)
 	{
-		$this->_layout = $name . $this->_config['template_file_ext'];
-		$this->_twig->addGlobal('_layout', '_layouts/'. $this->_layout);
+		$this->_layout = $name;
+		$this->_twig->addGlobal('_layout', '_layouts/'. $this->_layout . $this->_config['template_file_ext']);
 
 		return $this;
 	}
@@ -186,7 +191,7 @@ class Twiggy
 
 	public function template($name)
 	{
-		$this->_template = $name . $this->_config['template_file_ext'];
+		$this->_template = $name;
 
 		return $this;
 	}
@@ -216,7 +221,7 @@ class Twiggy
 	{
 		try
 		{
-			$output = $this->_twig->loadTemplate($this->_template);
+			$output = $this->_twig->loadTemplate($this->_template . $this->_config['template_file_ext']);
 			$output->display($this->_data);
 		}
 		catch(Twig_Error_Loader $e)
