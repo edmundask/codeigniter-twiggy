@@ -17,7 +17,7 @@ What is even more interesting, this does not replace CodeIgniter's default Views
 
 ## 1. Load library (as a spark)
 
-`$this->load->spark('twiggy');`
+`$this->load->spark('twiggy/x.x.x');` where `x.x.x` is the version you want to load (assuming you have it installed).
 
 ## 2. Set up dir structure
 
@@ -100,25 +100,14 @@ There is much more cool stuff that you should check out by visiting the [wiki](h
 
 # CHANGELOG
 
-Nothing here yet.
+### 0.8.1
+
+* Added `unset_data()` method to unset a particular variable, given a key.
+* Fixed a bug where calling render() would throw `Twig_Error_Loader` exception due to missing file extention.
+* Added a private method _load() to load the template and return output object where previously this was done both in render() and display() methods separately.
+* Added `Twig_Error_Loader` exception handling in render() method.
 
 # COPYRIGHT
-
-## Twig authors
-
-Twig is written and maintained by the Twig Team:
-
-**Lead Developer**:
-
-- Fabien Potencier <fabien.potencier@symfony-project.org>
-
-**Project Founder**:
-
-- Armin Ronacher <armin.ronacher@active-4.com>
-
-*See the license info located at vendor/Twig/LICENSE for more info.*
-
-## Twiggy
 
 Copyright (c) 2012 Edmundas Kondrašovas
 
