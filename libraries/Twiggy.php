@@ -109,6 +109,20 @@ class Twiggy
 			}	
 		}
 
+		return $this;
+	}
+
+	/**
+	 * Unset a particular variable
+	 * 
+	 * @access	public
+	 * @param 	mixed  	key (variable name)
+	 * @return	object 	instance of this class
+	 */
+
+	public function unset($key)
+	{
+		if(array_key_exists($key, $this->_data)) unset($this->_data[$key]);
 
 		return $this;
 	}
