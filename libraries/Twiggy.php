@@ -231,7 +231,14 @@ class Twiggy
 
 	public function render()
 	{
-		return $this->_load()->render($this->_data);
+		try
+		{
+			return $this->_load()->render($this->_data);
+		}
+		catch(Twig_Error_Loader $e)
+		{
+			show_error($e->getRawMessage());
+		}
 	}
 
 	/**
