@@ -120,7 +120,7 @@ class Twiggy
 	 * @return	object 	instance of this class
 	 */
 
-	public function unset($key)
+	public function unset_data($key)
 	{
 		if(array_key_exists($key, $this->_data)) unset($this->_data[$key]);
 
@@ -211,6 +211,18 @@ class Twiggy
 	}
 
 	/**
+	 * Load template and return output object
+	 * 
+	 * @access	private
+	 * @return	object	output
+	 */
+
+	private function _load()
+	{
+		return $this->_twig->loadTemplate($this->_template . $this->_config['template_file_ext']);
+	}
+
+	/**
 	 * Render and return compiled HTML
 	 * 
 	 * @access	public
@@ -219,9 +231,7 @@ class Twiggy
 
 	public function render()
 	{
-		$output = $this->_twig->loadTemplate($this->_template);
-
-		return $output->render($this->_data);
+		return $this->_load()->render($this->_data);
 	}
 
 	/**
@@ -235,8 +245,7 @@ class Twiggy
 	{
 		try
 		{
-			$output = $this->_twig->loadTemplate($this->_template . $this->_config['template_file_ext']);
-			$output->display($this->_data);
+			$this->_load()->display($this->_data);
 		}
 		catch(Twig_Error_Loader $e)
 		{
