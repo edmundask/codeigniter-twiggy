@@ -218,6 +218,11 @@ a#to-top:hover
 	-o-border-radius: 4px;
 }
 
+.tagged.warning
+{
+	background: #5c0a17;
+}
+
 .wip
 {
 	font-family: 'Comfortaa';

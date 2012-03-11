@@ -297,6 +297,91 @@ $this->output->set_output($output);</pre>
 $this->twiggy->template('account');
 $this->twiggy->display();</pre>
 
+    <h2>Functions &amp; Filters</h2>
+
+    <p>By default, functions are not accessible from the template files in Twig. So, for example, calling php_version() wouldn't work:</p>
+
+    <pre>{% extends _layout %}
+
+{% block content %}
+
+    Hello, I'm a template. I want you to meet PHP {{ php_version() }}.
+
+{% endblock %}</pre>
+
+    <p>This provides you with a delicate way of dealing with template files where you want to limit exposure of potentially unsafe function calls.
+      Therefore, in order to use functions you must register them within the Twig environment.</p>
+
+    <pre>$this->twiggy->register_function('php_version');</pre>
+
+    <!--<p>To register multiple functions, pass in an array of function names.</p>
+
+    <pre>$this->twiggy->register_function(array('php_version', 'some_function'));</pre>-->
+
+    <h3>Filters</h3>
+
+    <p>Filters are essentially just plain ol' functions, except Twig expects these functions to do something with given data and return it.
+      For example, you want to have a filter that takes a string as a parameter and returns the string with a prefix attached to it.</p>
+
+    <pre>function prefix_it($input, $prefix = 'prefix_')
+{
+    return $prefix . $input;
+}</pre>
+
+    <p>As with functions, filters must be registered within the Twig environment.</p>
+
+    <pre>$this->twiggy->register_filter('prefix_it');</pre>
+
+    <p>Finally, use the filter in the template.</p>
+
+    <pre>The table name is {{ "users"|prefix_it('cms_') }}.</pre>
+
+    <p>In the output you should get:</p>
+
+    <pre>The table name is cms_users.</pre>
+
+    <h3>Auto-register functions &amp; filters</h3>
+
+    <p>Registering functions and filters can get somewhat tedious when you have a lot of them and they get used frequently. 
+      Luckily, Twiggy has it covered. In the configuration file you should see two option keys: <span class="tagged">register_functions</span> and <span class="tagged">register_filters</span>.
+      Yup, this is the place to put your oftenly used functions and filters!</p>
+
+    <pre>$config['twiggy']['register_functions'] = array
+(
+    // Some functions from the url_helper.php
+    'site_url', 'base_url', 'uri_string', 'anchor', 'url_title'
+);
+
+$config['twiggy']['register_filters'] = array
+(
+    // Functions (filters) from the inflector_helper.php
+    'singular', 'plural', 'camelize', 'underscore', 'humanize'
+);</pre>
+
+    <p>Of course, keep in mind that these functions must be defined (meaning that if you use functions from helpers, make sure these helpers are loaded).</p>
+
+    <h2>Accessing Twig instance</h2>
+
+    <p>Twiggy exposes only the essential (and most frequently used) Twig functionality. However, there may be times when you will need to do something tricky.
+      Fear not, you have access to the twig instance!</p>
+
+    <pre>print_r($this->twiggy->twig);</pre>
+
+    <p>Twig allows you to not only register functions but also register them with different names. This is not possible in the current version of Twiggy through <span class="tagged">$this->twiggy->register_function()</span>.
+      But since we have access to the twig instance, we can call a method that will do what we want.</p>
+
+    <pre>$this->twiggy->twig->addFunction('my_php_version', new Twig_Function_Function('php_version'));</pre>
+
+    <p>In the template files we'll be able to call our function as such:</p>
+
+    <pre>Turns out I can have my own function name! Long live PHP {{ my_php_version() }}!</pre>
+
+    <p>We won't go through advanced Twig features here but you can always check the <a href="http://twig.sensiolabs.org/documentation">official documentation</a> for reference.</p>
+
+    <p><span class="tagged warning">WARNING:</span> twig instance is accessed with the help of <span class="tagged">__get()</span> magic PHP method. But, as you know, it
+      is also used for accessing variables. Therefore, do not set a template variable with the name 'twig'. Doing so won't overwrite the twig instance but you will not be
+      able to access it in your PHP code.</p>
+
   </section>
 
   <section id="about" class="container centered spaced">
@@ -305,9 +390,11 @@ $this->twiggy->display();</pre>
 
     <p>The author of Twiggy is <a href="http://edmundask.lt">Edmundas Kondrašovas</a>. However, he does not claim every piece of code as his own. Credit also goes to the authors of <a href="http://twig-project.org">Twig</a>.</p>
 
-    <h2>Donate</h2>
+    <h2 id="donate">Donate</h2>
 
     <!--<p>Twiggy is absolutely free of use and does not cost anything. But if you want, you can support the author by making a donation. See the details below.</p>-->
+
+    <p>Sorry, nothing here just yet.</p>
 
   </section>
 
