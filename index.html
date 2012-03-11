@@ -32,11 +32,21 @@
 
         <div class="description">
 
-          <p>twig template engine implementation for PHP framework called <span>CodeIgniter</span></p>
+          <p>twig template engine implementation for PHP framework called <a href="http://codeigniter.com">CodeIgniter</a></p>
 
         </div>
 
         <p class="wip">This is a work-in-progress, so hopefully the next time you visit this page you'll get to see more stuff.</p>
+
+        <br><br>
+
+        <a href="http://getsparks.org/packages/Twiggy/versions/HEAD/show" class="block-link">Twiggy Spark</a>
+
+        <a href="http://twig.sensiolabs.org" class="block-link">Official Twig Website</a>
+
+        <br><br><br>
+
+        <p>Current version: <span class="tagged">0.8.1</span></p>
 
       </div> <!-- #introduction END -->
 
@@ -49,7 +59,7 @@
           <li><a href="#overview">Overview</a></li>
           <li><a href="#installation">Installation &amp; Requirements</a></li>
           <li><a href="#usage">Basic Usage</a></li>
-          <li><a href="#examples">Examples</a></li>
+          <li><a href="#examples">Examples &amp; Best Practices</a></li>
           <li><a href="#about">About</a></li>
 
         </ul>
@@ -98,6 +108,8 @@
   <section id="usage" class="container centered spaced">
 
     <h1>Basic Usage</h1>
+
+    <p>Here we'll take a look at how to use Twiggy for the firs time.</p>
 
     <h2>1. Load it</h2>
 
@@ -199,9 +211,91 @@ $this->twiggy->template('welcome')->display();</pre>
 
   <section id="examples" class="container centered spaced">
 
-    <h1>Examples</h1>
+    <h1>Examples &amp; Best Practices</h1>
 
-    <p>Soon!</p>
+    <p>There are a lot of ways you can use Twiggy and nobody is going to beat you with a bat if you do it your own way. On the other hand, knowing how to efficiently use this library to your advantage can't hurt, right? Okay then, here we go!</p>
+
+    <h2>Data variables</h2>
+
+    <p>Twiggy distinguishes two types of data variables: standard (local) and global. The first one is pretty obvious -- these variables are only available inside the loaded template.
+      Global variables, on the other hand, are accessible from anywhere within Twig template files. They're extremely useful when you need to have access to some data no matter which template file you load, for example: authenticated user information such as username, avatar etc. 
+      Standard variables are good for page-specific data. For example, you want to iterate through an array of tracks for a specific music album. So let's take a look at how to set and access data variables.</p>
+
+    <h3>Synopsis</h3>
+
+    <pre>$this->twiggy->set($key, $value, $global = FALSE)</pre>
+
+    <h3>Standard variables</h3>
+
+    <pre>$this->twiggy->set('tracks', array('Afterlife', 'The Original', 'The War Inside'));</pre>
+
+    <h3>Global variables</h3>
+
+    <pre>$this->twiggy->set('user', array('username' => 'edmundas', 'email' => 'my.name@email.com'), TRUE);</pre>
+
+    <hr>
+
+    <p>You can also set multiple variables at once.</p>
+
+    <pre>$data = array();
+
+// Presumably you'll want to get these from the database through the model
+$data['albums'] = array('Nothing Is Sound', 'Oh! Gravity.', 'Vice Verses');
+$data['tracks'] = array('Afterlife', 'The Original', 'The War Inside');
+
+$this->twiggy->set($data);</pre>
+
+    <p>In the example above those would be standard variables. In order to set multiple <span class="tagged">global</span> variables, just leave the second parameter empty (NULL) and set the third parameter as TRUE.</p>
+
+    <pre>$data = array();
+
+// Presumably you'll want to get these from the database through the model
+$data['albums'] = array('Nothing Is Sound', 'Oh! Gravity.', 'Vice Verses');
+$data['tracks'] = array('Afterlife', 'The Original', 'The War Inside');
+
+// For some weird reason these need to be global
+$this->twiggy->set($data, NULL, TRUE);</pre>
+
+    <h3>Accessing data</h3>
+
+    <p>We'll not cover how to use variables inside templates as everything is well documented at the <a href="http://twigy-project.org">official twig website</a>. However, sometimes you will need to get the data inside the controller, model or even standard CodeIgniter view files.</p>
+
+    <pre>$albums = $this->twiggy->albums</pre>
+
+    <p>Here we see a bit of PHP 5 magic with <span class="tagged">__get()</span> method to get data variables.</p>
+
+    <h3>Unsetting data</h3>
+
+    <pre>$this->twiggy->unset_data('albums');</pre>
+
+
+    <h2>Handling output</h2>
+
+    <p>You can echo the output by calling <span class="tagged">$this->twiggy->display()</span> at the end of your controller. However, there's another method which does not print the ouput but rather returns it.</p>
+
+    <pre>
+// Render (compile) the output but don't display it
+$output = $this->twiggy->render();</pre>
+
+    <p>This gives you the possibility of sending the output to the <span class="tagged">Output</span> class (one of CodeIgniter's system classes).</p>
+
+    <pre>// Render (compile) the output but don't display it
+$output = $this->twiggy->render();
+
+// Set output
+$this->output->set_output($output);</pre>
+
+    <h2>Method chaining</h2>
+
+    <p>Instead of calling each method on a new line, why don't we take advantage of PHP 5 and use method chaining?</p>
+
+    <pre>$this->twiggy->set('username', 'edmundas')->template('account')->display();</pre>
+
+    <p>This is the same as writting:</p>
+
+    <pre>$this->twiggy->set('username', 'edmundas');
+$this->twiggy->template('account');
+$this->twiggy->display();</pre>
 
   </section>
 

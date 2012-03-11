@@ -15,7 +15,8 @@ body
 
 h1, h2, h3 { font-family: 'Comfortaa'; font-weight: 300; text-transform: uppercase; }
 h1 { font-size: 2em; color: #5e2843; }
-h2 { font-size: 1.2em; color: black; margin: 0 0 7px; }
+h2 { font-size: 1.2em; color: white; padding: 4px; margin: 0 0 7px; background: #7a1648;}
+h3 { font-size: 1em; margin: 0 0 10px 0; color: #7d2c00; }
 
 p { line-height: 1.3em; margin: 0 0 15px 0; }
 
@@ -27,6 +28,7 @@ pre
 	margin: 0 0 5px 0;
 	font-size: 0.8em;
 	font-family: 'Bitstream Vera Sans Mono', courier, monospace;
+	margin: 0 0 10px 0;
 }
 
 a { color: #88154e; }
@@ -222,6 +224,28 @@ a#to-top:hover
 	font-weight: 300; 
 	font-size: 1.2em;
 	color: #930049;
+}
+
+a.block-link
+{
+	padding: 15px 20px;
+	margin: 20px 0 0 0;
+	font-family: 'Comfortaa';
+	font-weight: 400; 
+	font-size: 1.4em;
+	text-decoration: none;
+	background: #5e2843;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+
+a.block-link:hover
+{
+	background: #161013;
 }
 
 /************************************************************************
