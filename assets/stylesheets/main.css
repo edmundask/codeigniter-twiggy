@@ -13,7 +13,7 @@ body
 	font-size: 1.2em;
 }
 
-h1, h2, h3 { font-family: 'Comfortaa Thin'; text-transform: uppercase; }
+h1, h2, h3 { font-family: 'Comfortaa'; font-weight: 300; text-transform: uppercase; }
 h1 { font-size: 2em; color: #5e2843; }
 h2 { font-size: 1.2em; color: black; margin: 0 0 7px; }
 
@@ -53,7 +53,8 @@ header
 
 #introduction .description
 {
-	font-family: 'Comfortaa Thin';
+	font-family: 'Comfortaa';
+	font-weight: 300; 
 	font-size: 1.5em;
 }
 
@@ -62,7 +63,8 @@ header
 	float: right;
 	padding: 15px 20px;
 	margin: 20px 0 0 0;
-	font-family: 'Comfortaa Bold';
+	font-family: 'Comfortaa';
+	font-weight: 700; 
 	font-size: 1.5em;
 	text-decoration: none;
 	background: #5e2843;
@@ -114,6 +116,7 @@ nav ul
 	margin: 40px 0 0 0;
 	text-transform: uppercase;
 	font-family: 'Comfortaa';
+	font-weight: 400; 
 }
 
 nav ul li
@@ -178,6 +181,24 @@ section ul li
 	color: #5e2843;
 }
 
+a#to-top
+{
+	background: #161013;
+	padding: 10px 15px;
+	color: white;
+	font-family: 'Comfortaa';
+	font-weight: 700;
+	position: fixed;
+	top: 0;
+	display: none;
+	text-decoration: none;
+}
+
+a#to-top:hover
+{
+	background: #341b27;
+}
+
 /************************************************************************
 * Main classes
 ************************************************************************/
@@ -197,7 +218,8 @@ section ul li
 
 .wip
 {
-	font-family: 'Comfortaa Thin';
+	font-family: 'Comfortaa';
+	font-weight: 300; 
 	font-size: 1.2em;
 	color: #930049;
 }
@@ -219,7 +241,7 @@ section ul li
 * Transitions
 ************************************************************************/
 
-a, nav ul li a, nav ul li
+a
 {
 	-webkit-transition: all 0.4s ease-in-out;
 	-moz-transition: all 0.4s ease-in-out;
