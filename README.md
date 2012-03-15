@@ -10,7 +10,7 @@ What is even more interesting, this does not replace CodeIgniter's default Views
 
 # Requirements
 
-* PHP 5.3.x
+* PHP 5.2.4+
 * [CodeIgniter](http://codeigniter.com/) 2.x
 
 # How To Use It
