@@ -12,7 +12,7 @@
  * @category  			Libraries
  * @author    			Edmundas Kondrašovas <as@edmundask.lt>
  * @license   			http://www.opensource.org/licenses/MIT
- * @version   			0.8.1
+ * @version   			0.8.2
  * @copyright 			Copyright (c) 2012 Edmundas Kondrašovas <as@edmundask.lt>
  */
 
@@ -60,6 +60,9 @@ class Twiggy
 			log_message('error', 'Twiggy: failed to load the default theme');
 			show_error($e->getRawMessage());
 		}
+
+		// Decide whether to enable Twig cache. If it is set to be enabled, then set the path where cached files will be stored.
+		$this->_config['environment']['cache'] = ($this->_config['environment']['cache']) ? $this->_config['twig_cache_dir'] : FALSE;
 		
 		$this->_twig = new Twig_Environment($this->_twig_loader, $this->_config['environment']);
 		$this->_twig->setLexer(new Twig_Lexer($this->_twig, $this->_config['delimiters']));

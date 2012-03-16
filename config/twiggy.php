@@ -12,7 +12,7 @@
  * @category  			Config
  * @author    			Edmundas Kondrašovas <as@edmundask.lt>
  * @license   			http://www.opensource.org/licenses/MIT
- * @version   			0.8.1
+ * @version   			0.8.2
  * @copyright 			Copyright (c) 2012 Edmundas Kondrašovas <as@edmundask.lt>
  */
 
@@ -70,6 +70,15 @@ $config['twiggy']['delimiters'] = array
 | These are all twig-specific options that you can set. To learn more about
 | each option, check the official documentation.
 |
+| NOTE: cache option works slightly differently than in Twig. In Twig you
+| can either set the value to FALSE to disable caching, or set the path
+| to where the cached files should be stored (which means caching would be
+| enabled in that case). This is not entirely convenient if you need to 
+| switch between enabled or disabled caching for debugging or other reasons.
+|
+| Therefore, here the value can be either TRUE or FALSE. Cache directory
+| can be set separately.
+|
 */
 
 $config['twiggy']['environment']['cache']              	= FALSE;
@@ -92,7 +101,7 @@ $config['twiggy']['environment']['optimizations']      	= -1;
 |
 */
 
-$config['twiggy']['twig_cache_dir'] = 'cache/twig/';
+$config['twiggy']['twig_cache_dir'] = APPPATH . 'cache/twig/';
 
 /*
 |--------------------------------------------------------------------------
