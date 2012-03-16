@@ -299,24 +299,24 @@ $this->twiggy->display();</pre>
 
     <h2>Functions &amp; Filters</h2>
 
-    <p>By default, functions are not accessible from the template files in Twig. So, for example, calling php_version() wouldn't work:</p>
+    <p>By default, functions are not accessible from the template files in Twig. So, for example, calling phpversion() wouldn't work:</p>
 
     <pre>{% extends _layout %}
 
 {% block content %}
 
-    Hello, I'm a template. I want you to meet PHP {{ php_version() }}.
+    Hello, I'm a template. I want you to meet PHP {{ phpversion() }}.
 
 {% endblock %}</pre>
 
     <p>This provides you with a delicate way of dealing with template files where you want to limit exposure of potentially unsafe function calls.
       Therefore, in order to use functions you must register them within the Twig environment.</p>
 
-    <pre>$this->twiggy->register_function('php_version');</pre>
+    <pre>$this->twiggy->register_function('phpversion');</pre>
 
     <!--<p>To register multiple functions, pass in an array of function names.</p>
 
-    <pre>$this->twiggy->register_function(array('php_version', 'some_function'));</pre>-->
+    <pre>$this->twiggy->register_function(array('phpversion', 'some_function'));</pre>-->
 
     <h3>Filters</h3>
 
@@ -370,11 +370,11 @@ $config['twiggy']['register_filters'] = array
     <p>Twig allows you to not only register functions but also register them with different names. This is not possible in the current version of Twiggy through <span class="tagged">$this->twiggy->register_function()</span>.
       But since we have access to the twig instance, we can call a method that will do what we want.</p>
 
-    <pre>$this->twiggy->twig->addFunction('my_php_version', new Twig_Function_Function('php_version'));</pre>
+    <pre>$this->twiggy->twig->addFunction('my_phpversion', new Twig_Function_Function('phpversion'));</pre>
 
     <p>In the template files we'll be able to call our function as such:</p>
 
-    <pre>Turns out I can have my own function name! Long live PHP {{ my_php_version() }}!</pre>
+    <pre>Turns out I can have my own function name! Long live PHP {{ my_phpversion() }}!</pre>
 
     <p>We won't go through advanced Twig features here but you can always check the <a href="http://twig.sensiolabs.org/documentation">official documentation</a> for reference.</p>
 
