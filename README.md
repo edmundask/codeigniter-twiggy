@@ -100,6 +100,10 @@ There is much more cool stuff that you should check out by visiting the [wiki](h
 
 # CHANGELOG
 
+### 0.8.2
+
+* Fixed a problem with Twig cache. Caching should now work as expected.
+
 ### 0.8.1
 
 * Added `unset_data()` method to unset a particular variable, given a key.
