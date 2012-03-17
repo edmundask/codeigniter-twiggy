@@ -214,3 +214,15 @@ $config['twiggy']['register_filters'] = array
 (
 
 );
+
+/*
+|--------------------------------------------------------------------------
+| Title separator
+|--------------------------------------------------------------------------
+|
+| Lets you specify the separator used in separating sections of the title 
+| variable.
+|
+*/
+
+$config['twiggy']['title_separator'] = ' | ';

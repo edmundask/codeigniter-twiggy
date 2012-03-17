@@ -83,6 +83,8 @@ class Twiggy
 		{
 			foreach($this->_config['register_filters'] as $filter) $this->register_filter($filter);
 		}
+
+		$this->_globals['title'] = NULL;
 	}
 
 	/**
@@ -128,6 +130,92 @@ class Twiggy
 	public function unset_data($key)
 	{
 		if(array_key_exists($key, $this->_data)) unset($this->_data[$key]);
+
+		return $this;
+	}
+
+	/**
+	 * Set title
+	 * 
+	 * @access	public
+	 * @param 	string	
+	 * @return	object 	instance of this class
+	 */
+
+	public function title()
+	{
+		if(func_num_args() > 0)
+		{
+			// If at least one parameter is passed in to this method, 
+			// call append() to either set the title or append additional
+			// string data to it.
+			call_user_func_array(array($this, 'append'), func_get_args());
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Append string to the title
+	 * 
+	 * @access	public
+	 * @param 	string	
+	 * @return	object 	instance of this class
+	 */
+
+	public function append()
+	{
+		$args = func_get_args();
+		$title = implode($this->_config['title_separator'], $args);
+
+		if(empty($this->_globals['title']))
+		{
+			$this->set('title', $title, TRUE);
+		}
+		else
+		{
+			$this->set('title', $this->_globals['title'] . $this->_config['title_separator'] . $title, TRUE);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Prepend string to the title
+	 * 
+	 * @access	public
+	 * @param 	string	
+	 * @return	object 	instance of this class
+	 */
+
+	public function prepend()
+	{
+		$args = func_get_args();
+		$title = implode($this->_config['title_separator'], $args);
+
+		if(empty($this->_globals['title']))
+		{
+			$this->set('title', $title, TRUE);
+		}
+		else
+		{
+			$this->set('title', $title . $this->_config['title_separator'] . $this->_globals['title'], TRUE);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Set title separator
+	 * 
+	 * @access	public
+	 * @param 	string	separator
+	 * @return	object 	instance of this class
+	 */
+
+	public function set_title_separator($separator = ' | ')
+	{
+		$this->_config['title_separator'] = $separator;
 
 		return $this;
 	}
