@@ -28,6 +28,7 @@ class Twiggy
 	private $_config = array();
 	private $_template_locations = array();
 	private $_data = array();
+	private $_globals = array();
 	private $_themes_base_dir;
 	private $_theme;
 	private $_layout;
@@ -105,6 +106,7 @@ class Twiggy
 			if($global)
 			{
 				$this->_twig->addGlobal($key, $value);
+				$this->_globals[$key] = $value;
 			}
 			else
 			{
@@ -344,7 +346,16 @@ class Twiggy
 	{
 		if($variable == 'twig') return $this->_twig;
 
-		return (array_key_exists($variable, $this->_data)) ? $this->_data[$variable] : FALSE;
+		if(array_key_exists($variable, $this->_globals))
+		{
+			return $this->_globals[$variable];
+		}
+		elseif(array_key_exists($variable, $this->_data))
+		{
+			return $this->_data[$variable];
+		}
+
+		return FALSE;
 	}
 }
 // End Class
