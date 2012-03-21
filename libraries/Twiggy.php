@@ -345,7 +345,7 @@ class Twiggy
 	 * Convert meta tag array to HTML code
 	 * 
 	 * @access	private
-	 * @param	array	meta tag
+	 * @param 	array 	meta tag
 	 * @return	string	HTML code
 	 */
 
@@ -483,9 +483,9 @@ class Twiggy
 	* Get metadata
 	*
 	* @access	public
-	* @param		string	(optional) name of the meta tag
-	* @param		boolean	whether to compile to html
-	* @return	mixed	array of tag(s), string (HTML) or FALSE
+	* @param 	string 	(optional) name of the meta tag
+	* @param 	boolean	whether to compile to html
+	* @return	mixed  	array of tag(s), string (HTML) or FALSE
 	*/
 
 	public function get_meta($name = '', $compile = FALSE)
