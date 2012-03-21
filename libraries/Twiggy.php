@@ -36,6 +36,7 @@ class Twiggy
 	private $_twig;
 	private $_twig_loader;
 	private $_module;
+	private $_meta = array();
 	
 	/**
 	* Constructor
@@ -85,6 +86,7 @@ class Twiggy
 		}
 
 		$this->_globals['title'] = NULL;
+		$this->_globals['meta'] = NULL;
 	}
 
 	/**
@@ -221,6 +223,23 @@ class Twiggy
 	}
 
 	/**
+	 * Set meta data
+	 * 
+	 * @access	public
+	 * @param 	string	name
+	 * @param	string	value
+	 * @param	string	(optional) name of the meta tag attribute
+	 * @return	object 	instance of this class
+	 */
+
+	public function meta($name, $value, $attribute = 'name')
+	{
+		$this->_meta[$name] = array('name' => $name, 'value' => $value, 'attribute' => $attribute);
+
+		return $this;
+	}
+
+	/**
 	 * Register a function in Twig environment
 	 * 
 	 * @access	public
@@ -304,6 +323,38 @@ class Twiggy
 	}
 
 	/**
+	 * Compile meta data into pure HTML
+	 * 
+	 * @access	private
+	 * @return	string	HTML
+	 */
+
+	private function _compile_metadata()
+	{
+		$html = '';
+
+		foreach($this->_meta as $meta)
+		{
+			$html .= $this->_meta_to_html($meta);
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Convert meta tag array to HTML code
+	 * 
+	 * @access	private
+	 * @param	array	meta tag
+	 * @return	string	HTML code
+	 */
+
+	private function _meta_to_html($meta)
+	{
+		return "<meta " . $meta['attribute'] . "=\"" . $meta['name'] . "\" content=\"" . $meta['value'] . "\">\n";
+	}
+
+	/**
 	 * Load template and return output object
 	 * 
 	 * @access	private
@@ -312,6 +363,8 @@ class Twiggy
 
 	private function _load()
 	{
+		$this->_globals['meta'] = $this->_compile_metadata();
+
 		return $this->_twig->loadTemplate($this->_template . $this->_config['template_file_ext']);
 	}
 
@@ -424,6 +477,32 @@ class Twiggy
 	public function get_template()
 	{
 		return $this->_template;
+	}
+
+	/**
+	* Get metadata
+	*
+	* @access	public
+	* @param		string	(optional) name of the meta tag
+	* @param		boolean	whether to compile to html
+	* @return	mixed	array of tag(s), string (HTML) or FALSE
+	*/
+
+	public function get_meta($name = '', $compile = FALSE)
+	{
+		if(empty($name))
+		{
+			return ($compile) ? $this->_compile_metadata() : $this->_meta;
+		}
+		else
+		{
+			if(array_key_exists($name, $this->_meta))
+			{
+				return ($compile) ? $this->_meta_to_html($this->_meta[$name]) : $this->_meta[$name];
+			}
+
+			return FALSE;
+		}
 	}
 
 	/**
