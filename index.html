@@ -382,6 +382,68 @@ $config['twiggy']['register_filters'] = array
       is also used for accessing variables. Therefore, do not set a template variable with the name 'twig'. Doing so won't overwrite the twig instance but you will not be
       able to access it in your PHP code.</p>
 
+    <h2>Dealing with the title tag</h2>
+
+    <p>While you can have, let's say, a global variable to store the value of the title tag, it might become tedious setting that value for each page while keeping track of which section of the website you are in (in regards to previous/parent page).</p>
+
+    <p>Luckily, Twiggy has a few methods to make your life easier.</p>
+
+    <h3>Before digging deeper</h3>
+
+    <p>There is no voodoo mojo stuff here. You are not forced to use this extra functionality. Essentially all that it does is it sets a global variable named <span class="tagged">title</span> based on how you use these additional methods. This variable, like any other, can be used inside twig templates.</p>
+
+    <pre>&lt;title&gt;{{ title }}&lt;/title&gt;</pre>
+
+    <h3>Set the title</h3>
+
+    <pre>$this->twiggy->title('Twiggy is awesome');</pre>
+
+    <p>With this method you can set the <b>default</b> title in, for example, <span class="tagged">MY_Controller.php</span>.</p>
+
+    <h3>Prepend and append data to the title</h3>
+
+    <p>Depending on your SEO strategy, convenience or other factors, you can prepend or append data to the existing title string.</p>
+
+    <pre>$this->twiggy->title()->prepend('Home');</pre>
+
+    <p>This will produce:</p>
+
+    <pre>Home | Twiggy is awesome</pre>
+
+    <p>while</p>
+
+    <pre>$this->twiggy->title()->append('Home');</pre>
+
+    <p>will produce:</p>
+
+    <pre>Twiggy is awesome | Home</pre>
+
+    <p>Note that when you want to prepend or append data to the <b>existing</b> title string, leave the title method empty (without params). Also, you may not like the title separator. It can be changed with the <span class="tagged">set_title_separator()</span> method.</p>
+
+    <pre>$this->twiggy->title('My personal blog')
+             ->prepend('Posts')
+             ->set_title_separator(' - ')
+             ->prepend('First blog entry');</pre>
+
+    <p>The code above will produce:</p>
+
+    <pre>First blog entry - Posts | My personal blog</pre>
+
+    <p>As you can see, method chaining works here as well.</p>
+
+    <p>One last trick to remember is that <span class="tagged">title()</span>, <span class="tagged">prepend()</span> and <span class="tagged">append()</span> methods accept multiple parameters.</p>
+
+    <pre>// By default passing in multilple params will invoke append()
+$this->twiggy->title('Control Panel', 'Login');</pre>
+
+    <p>Output:</p>
+
+    <pre>Control Panel | Login</pre>
+
+    <p>The code above is equivelent to this:</p>
+
+    <pre>$this->twiggy->title('Control Panel')->append('Login');</pre>
+
   </section>
 
   <section id="about" class="container centered spaced">
@@ -392,9 +454,9 @@ $config['twiggy']['register_filters'] = array
 
     <h2 id="donate">Donate</h2>
 
-    <!--<p>Twiggy is absolutely free of use and does not cost anything. But if you want, you can support the author by making a donation. See the details below.</p>-->
+    <p>Twiggy is absolutely free of use and does not cost anything. But if you want, you can support the author by making a donation. See the details below.</p>
 
-    <p>Sorry, nothing here just yet.</p>
+    <p><a href='http://www.pledgie.com/campaigns/16940'><img alt='Click here to lend your support to: codeigniter-twiggy and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/16940.png?skin_name=chrome' border='0' /></a></p>
 
   </section>
 

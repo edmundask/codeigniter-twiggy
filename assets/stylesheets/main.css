@@ -183,6 +183,11 @@ section ul li
 	color: #5e2843;
 }
 
+section:last-of-type
+{
+	margin-bottom: 50px;
+}
+
 a#to-top
 {
 	background: #161013;
