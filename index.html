@@ -444,6 +444,68 @@ $this->twiggy->title('Control Panel', 'Login');</pre>
 
     <pre>$this->twiggy->title('Control Panel')->append('Login');</pre>
 
+    <h2>Meta data (meta tags)</h2>
+
+    <p>Much like with the title tag, Twiggy helps you by eliminating the need to bother with meta tags "the hard way".</p>
+
+    <h3>Synopsis</h3>
+
+    <pre>$this->twiggy->meta($name, $value, $attribute = 'name');</pre>
+
+    <p>You will most likely want to set meta keywords and description. We won't get into whether having these tags in your code matter anymore in regards to search engines, that's not our goal!</p>
+
+    <pre>$this->twiggy->meta('keywords', 'twiggy, twig, template, layout, codeigniter');
+$this->twiggy->meta('description', 'Twiggy is an implementation of Twig template engine for CI');</pre>
+
+    <p>Then in your template file (probably the layout file) you can use this global variable named <span class="tagged">meta</span>.</p>
+
+    <pre>&lt;html&gt;
+  &lt;head&gt;
+    {{ meta }}
+  ...</pre>
+
+    <p>Twiggy will automatically compile the data into HTML code when <span class="tagged">render()</span> or <span class="tagged">display()</span> method is called.</p>
+
+    <pre>&lt;meta name="keywords" value="twiggy, twig, template, layout, codeigniter"&gt;
+&lt;meta name="description" value="Twiggy is an implementation of Twig template engine for CI"&gt;</pre>
+
+    <h3>Getting metadata in PHP code</h3>
+
+    <p>If you for whatever reason need to get metadata inside, for example, controller you can call <span class="tagged">get_meta()</span> method.</p>
+
+    <pre>get_meta($name = '', $compile = FALSE)</pre>
+
+    <p>As the code suggests, you can either get the raw data (an array) or compiled HTML code.</p>
+
+    <pre>$this->twiggy->get_meta('keywords');</pre>
+
+    <p>The code above will return "keywords" array.</p>
+
+    <pre>$this->twiggy->get_meta('keywords', TRUE);</pre>
+
+    <p>Here you will get a string (HTML code) instead.</p>
+
+    <pre>$this->twiggy->get_meta(NULL, TRUE);</pre>
+
+    <p>In this case you will get <b>ALL</b> meta data compiled into HTML code since the first parameter is NULL (empty).</p>
+
+    <h3>Unset metadata</h3>
+
+    <p>Naturally you can unset meta data with <span class="tagged">unset_meta()</span>.</p>
+
+    <pre>// unset only the keywords meta tag
+$this->twiggy->unset_meta('keywords');
+
+// unset all meta tags
+$this->twiggy->unset_meta();
+
+// unset keywords and description
+$this->twiggy->unset_meta('keywords', 'description');</pre>
+
+    <h2>Final Notes</h2>
+
+    <p>Make sure to check the configuration file to see which options you can change to suit your needs.</p>
+
   </section>
 
   <section id="about" class="container centered spaced">
