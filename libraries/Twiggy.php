@@ -240,6 +240,33 @@ class Twiggy
 	}
 
 	/**
+	 * Unset meta data
+	 * 
+	 * @access	public
+	 * @param 	string	(optional) name of the meta tag
+	 * @return	object	instance of this class
+	 */
+
+	public function unset_meta()
+	{
+		if(func_num_args() > 0)
+		{
+			$args = func_get_args();
+
+			foreach($args as $arg)
+			{
+				if(array_key_exists($arg, $this->_meta)) unset($this->_meta[$arg]);
+			}
+		}
+		else
+		{
+			$this->_meta = array();
+		}
+
+		return $this;
+	}
+
+	/**
 	 * Register a function in Twig environment
 	 * 
 	 * @access	public
