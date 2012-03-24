@@ -100,6 +100,12 @@ There is much more cool stuff that you should check out by visiting the [wiki](h
 
 # CHANGELOG
 
+### 0.8.3
+
+* Fixed a bug where global variables would not be available (accessible)
+* Added helper methods for dealing with the title tag.
+* Added helper methods for setting meta data (meta tags).
+
 ### 0.8.2
 
 * Fixed a problem with Twig cache. Caching should now work as expected.
@@ -110,6 +116,10 @@ There is much more cool stuff that you should check out by visiting the [wiki](h
 * Fixed a bug where calling render() would throw `Twig_Error_Loader` exception due to missing file extention.
 * Added a private method _load() to load the template and return output object where previously this was done both in render() and display() methods separately.
 * Added `Twig_Error_Loader` exception handling in render() method.
+
+# DONATE
+
+[![test](http://www.pledgie.com/campaigns/16940.png?skin_name=chrome)](http://www.pledgie.com/campaigns/16940)
 
 # COPYRIGHT
 
