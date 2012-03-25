@@ -87,7 +87,7 @@ $config['twiggy']['environment']['charset']            	= 'utf-8';
 $config['twiggy']['environment']['base_template_class']	= 'Twig_Template';
 $config['twiggy']['environment']['auto_reload']        	= NULL;
 $config['twiggy']['environment']['strict_variables']   	= FALSE;
-$config['twiggy']['environment']['autoescape']         	= TRUE;
+$config['twiggy']['environment']['autoescape']         	= FALSE;
 $config['twiggy']['environment']['optimizations']      	= -1;
 
 
