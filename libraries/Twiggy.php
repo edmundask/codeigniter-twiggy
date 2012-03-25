@@ -399,11 +399,14 @@ class Twiggy
 	 * Render and return compiled HTML
 	 * 
 	 * @access	public
+	 * @param 	string	(optional) template file
 	 * @return	string	compiled HTML
 	 */
 
-	public function render()
+	public function render($template = '')
 	{
+		if(!empty($template)) $this->template($template);
+
 		try
 		{
 			return $this->_load()->render($this->_data);
@@ -418,11 +421,14 @@ class Twiggy
 	 * Display the compiled HTML content
 	 *
 	 * @access	public
+	 * @param 	string	(optional) template file
 	 * @return	void
 	 */
 
-	public function display()
+	public function display($template = '')
 	{
+		if(!empty($template)) $this->template($template);
+
 		try
 		{
 			$this->_load()->display($this->_data);

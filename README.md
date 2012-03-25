@@ -100,6 +100,10 @@ There is much more cool stuff that you should check out by visiting the [wiki](h
 
 # CHANGELOG
 
+### 0.8.5
+
+* Changed `display()` and `render()` methods a little bit to accept a parameter. From now on you can set the template file without the `template()` method. For example: `$this->twiggy->display('admin/dashboard');` instead of `$this->twiggy->template('admin/dashboard')->display()`.
+
 ### 0.8.4
 
 * Fixed a bug where template locations would not be updated correctly after loading a different theme.
