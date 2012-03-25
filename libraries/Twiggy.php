@@ -443,6 +443,9 @@ class Twiggy
 
 	private function _set_template_locations($theme)
 	{
+		// Reset template locations array since we loaded a different theme
+		$this->_template_locations = array();
+		
 		// Check if HMVC is installed.
 		// NOTE: there may be a simplier way to check it but this seems good enough.
 		if(method_exists($this->CI->router, 'fetch_module'))
