@@ -100,6 +100,11 @@ There is much more cool stuff that you should check out by visiting the [wiki](h
 
 # CHANGELOG
 
+### 0.8.4
+
+* Fixed a bug where template locations would not be updated correctly after loading a different theme.
+* Changed `autoescape` Twig environment option to `FALSE` in the config file as the default value.
+
 ### 0.8.3
 
 * Fixed a bug where global variables would not be available (accessible)
