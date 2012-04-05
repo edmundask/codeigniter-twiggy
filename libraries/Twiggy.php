@@ -149,10 +149,12 @@ class Twiggy
 	{
 		if(func_num_args() > 0)
 		{
+			$args = func_get_args();
+
 			// If at least one parameter is passed in to this method, 
 			// call append() to either set the title or append additional
 			// string data to it.
-			call_user_func_array(array($this, 'append'), func_get_args());
+			call_user_func_array(array($this, 'append'), $args);
 		}
 
 		return $this;
