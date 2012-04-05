@@ -100,9 +100,11 @@ There is much more cool stuff that you should check out by visiting the [wiki](h
 
 # CHANGELOG
 
-### 0.8.5
+### 0.8.5 (not released yet)
 
 * Changed `display()` and `render()` methods a little bit to accept a parameter. From now on you can set the template file without the `template()` method. For example: `$this->twiggy->display('admin/dashboard');` instead of `$this->twiggy->template('admin/dashboard')->display()`.
+* Added `rendered()` method to check whether a template has already been rendered/displayed using `display()` or `render()`.
+* Fixed a bug where calling `func_get_args()` function as a parameter in another function would cause a fatal error: `Fatal error: func_get_args(): Can’t be used as a function parameter in <...>`.
 
 ### 0.8.4
 
