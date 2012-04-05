@@ -37,6 +37,7 @@ class Twiggy
 	private $_twig_loader;
 	private $_module;
 	private $_meta = array();
+	private $_rendered = FALSE;
 	
 	/**
 	* Constructor
@@ -391,6 +392,7 @@ class Twiggy
 	private function _load()
 	{
 		$this->_globals['meta'] = $this->_compile_metadata();
+		$this->_rendered = TRUE;
 
 		return $this->_twig->loadTemplate($this->_template . $this->_config['template_file_ext']);
 	}
@@ -450,7 +452,7 @@ class Twiggy
 	private function _set_template_locations($theme)
 	{
 		// Reset template locations array since we loaded a different theme
-		$this->_template_locations = array();
+		//$this->_template_locations = array();
 		
 		// Check if HMVC is installed.
 		// NOTE: there may be a simplier way to check it but this seems good enough.
@@ -539,6 +541,18 @@ class Twiggy
 
 			return FALSE;
 		}
+	}
+
+	/**
+	* Check if template is already rendered
+	*
+	* @access	public
+	* @return	boolean
+	*/
+
+	public function rendered()
+	{
+		return $this->_rendered;
 	}
 
 	/**
