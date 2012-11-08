@@ -469,7 +469,11 @@ class Twiggy
 
 				foreach($module_locations as $loc => $offset)
 				{
-					$this->_template_locations[] = $loc . $this->_module . '/' . $this->_config['themes_base_dir'] . $theme;
+					/* Only add the template location if the same exists, otherwise
+					you'll need always a directory for your templates, even your module
+					won't use templates */
+					if ( is_dir($loc . $this->_module . '/' . $this->_config['themes_base_dir'] . $theme) )
+						$this->_template_locations[] = $loc . $this->_module . '/' . $this->_config['themes_base_dir'] . $theme;
 				}
 			}
 		}
