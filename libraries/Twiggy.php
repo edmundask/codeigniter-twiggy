@@ -18,7 +18,9 @@
 
 if(!defined('TWIGGY_ROOT')) define('TWIGGY_ROOT', dirname(dirname(__FILE__)));
 
-require_once(TWIGGY_ROOT . '/vendor/Twig/lib/Twig/Autoloader.php');
+//If you don't like composer but love sparks. POSER!
+if ( !class_exists('ComposerAutoloaderInit') )
+	require_once(TWIGGY_ROOT . '/vendor/Twig/lib/Twig/Autoloader.php');
 Twig_Autoloader::register();
 
 class Twiggy
