@@ -395,7 +395,7 @@ class Twiggy
 
 	private function _load()
 	{
-		$this->_globals['meta'] = $this->_compile_metadata();
+		$this->set('meta', $this->_compile_metadata(), TRUE);
 		$this->_rendered = TRUE;
 
 		return $this->_twig->loadTemplate($this->_template . $this->_config['template_file_ext']);
