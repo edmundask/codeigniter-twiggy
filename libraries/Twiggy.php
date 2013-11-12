@@ -102,7 +102,7 @@ class Twiggy
 	 * @return	object 	instance of this class
 	 */
 
-	public function set($key, $value, $global = FALSE)
+	public function set($key, $value = NULL, $global = FALSE)
 	{
 		if(is_array($key))
 		{
